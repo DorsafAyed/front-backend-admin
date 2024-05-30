@@ -1,0 +1,32 @@
+server:
+  port: 7083
+  servlet:
+    context-path: /backend-admin
+
+keycloak:
+  realm: master
+  auth-server-url: http://172.29.208.1:7080/auth
+  resource: my-admin-app
+
+  ssl-required: all
+  use-resource-role-mappings: true
+
+spring:
+
+  application:
+    name: backend-admin
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: "http://172.29.208.1:7080/auth/realms/master"
+
+servlet:
+  cors:
+    enabled: true
+    allowed-origins: "http://172.29.208.1:7080/angular-admin/"
+    allowed-methods: "GET,POST,PUT,DELETE"
+    allowed-headers: "*"
+    allow-credentials: true
+    max-age: 3600

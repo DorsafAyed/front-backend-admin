@@ -1,0 +1,23 @@
+server:
+  port: 8083
+
+spring:
+  application.name: backend-gateway-client
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://192.168.1.16:4201"
+            allowedHeaders: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - DELETE
+              - PUT
+
+      routes:
+        - id: resources
+          uri: http://192.168.1.16:8082
+          predicates:
+            Path=/messages/**
